@@ -36,6 +36,7 @@ import TermsConditions from './pages/landing/legal/TermsConditions.jsx'
 import AdminContactManagement from './pages/admin/AdminContactManagement.jsx'
 import NotificationsMgmt from './pages/admin/NotificationsMgmt.jsx'
 import SettingsPage from './pages/admin/SettingsPage.jsx'
+import NotFound from './pages/landing/NotFound.jsx'
 
 function App() {
   return (
@@ -90,7 +91,10 @@ function App() {
           </Route>
 
           {/* Catch all */}
-          <Route path="*" element={<Navigate to="/" replace />} />
+          {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
+
+          {/* 404 Page */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthProvider>
     </Router>

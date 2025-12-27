@@ -11,29 +11,29 @@ const Contact = () => {
   const onSubmit = async (data) => {
     setSubmitStatus(null)
     setReferenceId('')
-    
+
     try {
       const response = await axios.post('http://localhost:8080/api/contact/submit', data)
-      
+
       setSubmitStatus({
         type: 'success',
         message: response.data.message,
         referenceId: response.data.referenceId
       })
-      
+
       // Reset form
       reset()
-      
+
       // Auto-clear success message after 10 seconds
       setTimeout(() => {
         setSubmitStatus(null)
       }, 10000)
-      
+
     } catch (error) {
       console.error('Error submitting contact form:', error)
-      
+
       let errorMessage = 'Failed to send message. Please try again.'
-      
+
       if (error.response) {
         if (error.response.status === 400) {
           errorMessage = error.response.data?.message || 'Invalid form data. Please check your inputs.'
@@ -45,7 +45,7 @@ const Contact = () => {
       } else if (error.request) {
         errorMessage = 'Network error. Please check your connection.'
       }
-      
+
       setSubmitStatus({
         type: 'error',
         message: errorMessage
@@ -57,23 +57,23 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'Email',
-      details: 'contact@swajyot.com',
+      details: 'info@swajyot.co.in',
       subtitle: 'General inquiries and support',
-      action: 'mailto:contact@swajyot.com'
+      action: 'mailto:info@swajyot.co.in'
     },
     {
       icon: Phone,
       title: 'Phone',
-      details: '+91 98765 43210',
+      details: '+91 80 4010 9777 / 88',
       subtitle: 'Mon-Fri from 9am to 6pm IST',
-      action: 'tel:+919876543210'
+      action: 'tel:+918040109777'
     },
     {
       icon: MapPin,
       title: 'Headquarters',
-      details: '123 Tech Park, Sector 18',
-      subtitle: 'Gurugram, Haryana 122015',
-      action: 'https://maps.google.com'
+      details: `Swajyot Technologies Pvt. Ltd, #5, 7th Cross, Ashwini Layout,Koramangala Intermediate Road`,
+      subtitle: 'Bengaluru - 560047, Karnataka, INDIA.',
+      action: 'https://www.google.com/maps/place/SWAJYOT+TECHNOLOGIES+PVT.+LTD./@12.9389733,77.6270221,17z/data=!3m1!4b1!4m6!3m5!1s0x3bae15cd1fbac65b:0xf4fe47b0eb46ba42!8m2!3d12.9389681!4d77.6296024!16s%2Fg%2F11n38b9yrd?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA3MUgBUAM%3D'
     },
     {
       icon: Globe,
@@ -117,15 +117,13 @@ const Contact = () => {
       {/* Success/Error Messages */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
         {submitStatus && (
-          <div className={`mb-8 p-6 rounded-2xl shadow-2xl ${
-            submitStatus.type === 'success' 
-              ? 'bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200' 
+          <div className={`mb-8 p-6 rounded-2xl shadow-2xl ${submitStatus.type === 'success'
+              ? 'bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200'
               : 'bg-gradient-to-r from-red-50 to-rose-50 border-2 border-red-200'
-          }`}>
+            }`}>
             <div className="flex items-start">
-              <div className={`flex-shrink-0 p-4 rounded-full ${
-                submitStatus.type === 'success' ? 'bg-green-100' : 'bg-red-100'
-              }`}>
+              <div className={`flex-shrink-0 p-4 rounded-full ${submitStatus.type === 'success' ? 'bg-green-100' : 'bg-red-100'
+                }`}>
                 {submitStatus.type === 'success' ? (
                   <CheckCircle className="h-8 w-8 text-green-600" />
                 ) : (
@@ -133,14 +131,12 @@ const Contact = () => {
                 )}
               </div>
               <div className="ml-6">
-                <h3 className={`text-2xl font-bold ${
-                  submitStatus.type === 'success' ? 'text-green-800' : 'text-red-800'
-                }`}>
+                <h3 className={`text-2xl font-bold ${submitStatus.type === 'success' ? 'text-green-800' : 'text-red-800'
+                  }`}>
                   {submitStatus.type === 'success' ? 'Message Sent Successfully!' : 'Failed to Send Message'}
                 </h3>
-                <p className={`mt-2 text-lg ${
-                  submitStatus.type === 'success' ? 'text-green-700' : 'text-red-700'
-                }`}>
+                <p className={`mt-2 text-lg ${submitStatus.type === 'success' ? 'text-green-700' : 'text-red-700'
+                  }`}>
                   {submitStatus.message}
                 </p>
                 {submitStatus.referenceId && (
@@ -282,11 +278,10 @@ const Contact = () => {
                           />
                           <label
                             htmlFor={type.id}
-                            className={`flex flex-col items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all ${
-                              errors.inquiryType 
-                                ? 'border-red-300' 
+                            className={`flex flex-col items-center justify-center p-4 border-2 rounded-xl cursor-pointer transition-all ${errors.inquiryType
+                                ? 'border-red-300'
                                 : 'border-gray-200 hover:border-primary-300 hover:shadow-lg'
-                            }`}
+                              }`}
                           >
                             <div className="p-3 rounded-lg bg-gray-50 mb-3">
                               <type.icon className="w-6 h-6 text-gray-600" />
@@ -316,7 +311,7 @@ const Contact = () => {
                         type="text"
                         id="name"
                         disabled={isSubmitting}
-                        {...register('name', { 
+                        {...register('name', {
                           required: 'Name is required',
                           minLength: {
                             value: 2,
@@ -362,7 +357,7 @@ const Contact = () => {
                         type="email"
                         id="email"
                         disabled={isSubmitting}
-                        {...register('email', { 
+                        {...register('email', {
                           required: 'Email is required',
                           pattern: {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -414,7 +409,7 @@ const Contact = () => {
                       type="text"
                       id="subject"
                       disabled={isSubmitting}
-                      {...register('subject', { 
+                      {...register('subject', {
                         required: 'Subject is required',
                         minLength: {
                           value: 5,
@@ -440,7 +435,7 @@ const Contact = () => {
                       id="message"
                       rows="6"
                       disabled={isSubmitting}
-                      {...register('message', { 
+                      {...register('message', {
                         required: 'Message is required',
                         minLength: {
                           value: 20,
@@ -538,9 +533,9 @@ const Contact = () => {
                 <p className="text-sm text-gray-600 mb-3">
                   For urgent matters, call our emergency support line
                 </p>
-                <a href="tel:+911800123456" className="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700">
+                <a href="tel:+918040109777" className="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700">
                   <Phone className="w-4 h-4 mr-2" />
-                  +91 1800 123 456
+                  +91 8040109777/88
                 </a>
               </div>
               <div className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-2xl border-2 border-gray-100">
@@ -548,9 +543,9 @@ const Contact = () => {
                 <p className="text-sm text-gray-600 mb-4">
                   Book a 30-minute consultation with our experts
                 </p>
-                <a 
-                  href="https://calendly.com/swajyot/consultation" 
-                  target="_blank" 
+                <a
+                  href="https://calendly.com/swajyot/consultation"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center w-full py-2 bg-primary-50 text-primary-700 rounded-lg font-medium hover:bg-primary-100 transition-colors"
                 >
