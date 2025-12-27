@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { Menu, X, Bell, Search, User } from 'lucide-react'
 import { useState } from 'react'
+import logo from '../assets/Swajyot-Tech-Logo-Slogan-Blue.png'
 
 const Navbar = () => {
   const { user, logout } = useAuth()
@@ -14,13 +15,13 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-white shadow-lg">
+    <nav className="sticky top-0 z-50 bg-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <a className="brand" href="/">
-              Swajyot Technologies
-            </a>
+            <Link to="/" className="flex items-center">
+              <img src={logo} alt="Swajyot Technologies" className="h-10 w-auto" />
+            </Link>
             <div className="hidden md:flex items-center ml-10 space-x-8">
               <Link to="/" className="text-gray-700 hover:text-primary-600">Home</Link>
               <Link to="/about" className="text-gray-700 hover:text-primary-600">About</Link>
